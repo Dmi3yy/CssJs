@@ -16,9 +16,13 @@ foreach ($filesArr as $key => $value) {
 	$filesForMin[$key] = $file;  
 }
 if ($minify == '1') {
-	include_once(MODX_BASE_PATH. "assets/snippets/cssjs/class.magic-min.php"); 
-	$minified = new Minifier();
-	$min = $minified->merge( MODX_BASE_PATH.$folder.'scripts.min.js', 'js', $filesForMin );
+	include_once(MODX_BASE_PATH. "assets/snippets/cssjs/Minifier.php");
+	$javascript = '';
+	foreach($filesForMin as $file) {
+			$javascript .= file_get_contents($file) . PHP_EOL;
+	}
+	$minified_javascript = \JShrink\Minifier::minify($javascript);
+	file_put_contents(MODX_BASE_PATH.$folder.'scripts.min.js', $minified_javascript);
 	return '<script src="'.$modx->config['site_url'].$folder.'scripts.min.js?v='.substr(md5(max($v)),0,3).'"></script>';
 }else{
 	$links = '';
