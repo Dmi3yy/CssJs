@@ -61,6 +61,17 @@ class Minifier {
     public $output_file;
     public $extension;
     private $type;
+    private $directory;
+    private $create_new;
+    private $compilation;
+    private $file;
+    private $compressed;
+    private $prequel;
+    private $new_file;
+    private $compiled;
+    private $source;
+    private $output;
+    private $handle;
     //Max image size for inclusion
     const IMAGE_MAX_SIZE = 5;
     //For script execution time (src: http://bit.ly/18O3VWw)
